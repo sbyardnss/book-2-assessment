@@ -2,11 +2,26 @@
     Remember to use comments to define the algorithm(s) needed
     BEFORE you write any code
 */
-const calculateYearlyExpenses = () => { }
+const calculateYearlyExpenses = (obj) => {
+    const yearlyExpense = obj.monthlyExpenses * 12;
+    return yearlyExpense;
+ }
 
-const calculateExpensesPercentage = () => { }
+const calculateExpensesPercentage = (obj, expenses) => {
+    const expensePercent = expenses / obj.salary * 100;
+    return expensePercent;
+ }
 
-const isQualified = () => { }
+const isQualified = (obj, expensePercent) => {
+    if (expensePercent <= 10) {
+        obj.mortgage.qualified = true;
+        obj.mortgage.amount = obj.salary * 5;
+    } else {
+        obj.mortgage.qualified = false;
+        obj.mortgage.amount = 0;
+    }
+    return obj;
+}
 
 const mortgageApplicants = [
     { id: 1, name: "James Runolfsdottir", monthlyExpenses: 343.7, salary: 49938.68, mortgage: {}, address: "866 Weissnat Forks", city: "South Dario" },
@@ -27,15 +42,30 @@ const mortgageApplicants = [
     functions to determine if they are qualified for a mortgage
 */
 
+for (const applicant of mortgageApplicants) {
+    const yearExp = calculateYearlyExpenses(applicant);
+    const yearPercent = calculateExpensesPercentage(applicant, yearExp);
+    const decision = isQualified(applicant, yearPercent);
+    if(applicant.mortgage.qualified === true) {
+        console.log(`${applicant.name} is qualified for a maximum mortgage of $${applicant.mortgage.amount}`)
+    }
+}
 
 
 
 
+/*
+console.log(calculateYearlyExpenses(mortgageApplicants[1]))
+// works
 
 
+console.log(calculateExpensesPercentage(mortgageApplicants[1], 9408.5))
+// works
 
 
-
+console.log(isQualified(mortgageApplicants[1], 7.89))
+// works
+*/
 
 
 
